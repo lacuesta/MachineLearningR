@@ -239,4 +239,145 @@ p <- predict(m, test)
 - m: model trained by the `M5P()` function
 - test: data frame containing test data
 
-# Neural Networks and Support Vector Machinesº
+# Neural Networks 
+Pros:
+- Can be adapted to classification or numeric prediction problems
+- Among the most accurate modeling approaches
+- Makes few assumptions about the data's underlying relationships
+Cons:
+- Computiationally intensive and slow to train
+- Easy to overfit or unferfit
+- Results in a complex black box model.
+### Neural network syntax
+Use the `neuralnet()' function in the 'neuralnet' package.
+### Build the model
+```{r}
+m <- neuralnet(target ~ predictors, data = mydata, hidden = 1)
+```
+- target: outcome in the mydata data frame to be modeled
+- predictors: R formula specifying the features in the mydata data fra,e
+- hidden: number of neurons in the hidden layer
+
+### Make predictions
+```{r}
+p <- compute(m, test)
+```
+- m: model trained by the `neuralnet()`function
+- test: data frame containing test data with the same features as the training data
+The function returns a list with two components: `$neurons` which stores the neurons for each layer in the network and `$net.result` which stores the model's predicted values
+
+# Support Vector Machines
+Pros:
+- Can ve used for classification or numeric prediction problems
+- Not influenced by noisi data
+- Easier than neural networks
+- High accuracy
+
+Cons:
+- Finding the best model requires testing of various combinations of kernel and model parameters
+- Can be slow to train
+- Results in complex black bo model
+## Support vector machine syntax
+Use the `ksvm()` function in the `kernlab` package.
+## Build the model
+```{r}
+m <- ksvm(target ~ predictors, data = mydata, kernel = "rbfdot", C = 1)
+```
+- target: the outcome in the mydata data frame to be modeled
+- predictors: R formula specifying the features to use for prediction
+- data: the training data frame
+- kernel: nonlinear mapping such as "rbfdot" (radial basis), "polydot"(polynomial), "tanhdot"(hyperbolic tangentsigmoid) or "vanilladot" (linear)
+- C: number that specifies the cost of violating the constraints.
+
+## Make predictions
+```{r}
+p <- predict(m, test, type = "response")
+```
+- m: model trained by the `ksvm()`function
+- test: data frame with the test data
+- type: "response" (predicted class) or "probabilities" (predicted probabolity)
+
+# Association rules
+Pros: 
+- Suited for working with very large amounts of transactional data
+- Rules easy to understand
+- Useful for data mining
+
+Cons:
+- Not helpfull for small datasets
+- Takes effort to separate the insight from the common sense
+- Easy to draw spurious conclusions from random patterns
+
+## Association rule syntax
+Use `apriori()` function in `arules` package
+## Find association rules:
+```{r}
+myrules <- apriori(data = mydata, parameter = list(support = 0.1,
+                                                   confidence = 0.8,
+                                                   minlen = 1))
+```
+- data: sparse item matrix holding transactional data
+- support: minimum required rule support
+- confidence: minimum required rule confidence
+- minlen: minimum required rule items
+
+## Examine association rules
+```{r}
+inspect(myrules)
+```
+
+# Clustering with k-means
+## k-means algorithm for clustering
+Pros:
+- Uses simple principles for identifying clusters
+- highly flexible
+- Fairly efficient 
+
+Cons:
+- Low sophisticated
+- Uses elements of random chance
+- Requires a reasonable guess as to how many clusters exist in the data
+
+### Clustering syntax
+Use the `kmeans()´function in the ´stats´ package
+### Find clusters:
+```{r}
+myclusters <- kmeans(mydata, k)
+```
+- mydata: matrix or data frame with the examples to be clustered
+- k: desired number of clusters
+### Examine clusters
+- mycluster$cluster: vector of cluster assignments
+- mycluster$centers: matrix indicating the men values for each features
+- myclusters$size: number of examples assigned to each cluster
+
+# Random forests
+Pros: 
+- All-purpose model that perfoms well on most problems
+- Can handle noisy or missing data, categorical or continous features
+- Selects the most important features
+- Can be used on data with high number of features or examples
+
+Cons:
+- Not easily interpretable
+- May require some work to tune the model
+
+## Random forest syntax
+Use `randomForest()` function in the `randomForest` package
+## Build the classifier
+```{r}
+m <- randomForest(train, class, ntree = 500, mtry = sqrt(p))
+```
+- train: data frame with training data
+- class: factor vector with the class for each row
+- ntree: number of trees to grow
+- mtry: optional integer specifying the number of features to randomly select at each split, p is the number of features in the data
+
+## Make predictions
+```{r}
+p <- predict(n ,test, type = "response")
+```
+- m: model trained by the `randomForest()` function
+- test: data frame with the test data
+- type: "response" (predicted class), "prob" (predicted probabilities) or "votes"(matrix of vote counts).
+
