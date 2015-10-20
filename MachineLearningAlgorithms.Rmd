@@ -33,3 +33,129 @@ p <- knn(train, test, class, k)
 - k: integer indcating the number of nearest neighbors
 
 
+# Naive Bayes algorithm
+Pros:
+- Simple, fast and effective
+- Does well with noisy and missing data
+- Requires few examples for training
+- Easy to obtain the estimated probability for prediction
+
+Cons:
+- Relies on the assumption of equally important and independent features
+- Not ideal for datasets with large numbers of numeric features
+- Estimated probabilities are less reliable than the predicted classes
+
+It uses frequency tables, so each feature must be categorical in order to create the combinations of class and feature values. The solutions are: discretize (binning).
+
+## Naive Bayes classification syntax.
+Use the 'naiveBayes()' function in the 'e1071' package.
+### Build the classifier
+'''{r}
+m <- naiveBayes(train, class, laplace = 0)
+'''
+- train: data frame or matrix containing the training data
+- class: factor vector with the class for each row in the training data
+- laplace: number to control the Laplace estimator
+
+### Make predictions
+'''{r}
+p <- predict(m , test, type = "class")
+'''
+- m: model trained by 'naiveBayes()'
+- test: data frame or matrix with test data with the same features as the training data
+- type: "class" or "raw" that specifies if the predictions should be the most likely class value or the raw predicted probabilities.
+
+# Decision trees
+## The C5.0 decision tree algorithm
+Pros:
+- All purpose classifier
+- Highly automatic learning process that can handle numeric or nominal features and missing data
+- Uses the most importand features
+- Can be used on data with relatively few training examples
+- Results in a model easy to interpret
+- Very efficient
+
+Cons:
+- Often biased toward splits on features having a large number of levels
+- Easy to overfit or underfit
+- Trouble modeing some relationships due to reliance on axis-parallel splits
+- Small changes in training data can result in large changes to the decision tree
+- Large trees difficult to interpret
+
+### C5.0 decision tree syntax
+Use the 'C5.0()' function in the 'C50' package
+### Build the model
+'''{r}
+m <- C5.0(train, class, trials = 1, costs = NULL)
+'''
+- train: data frame with the training data
+- class: factor vector with the class for each row in the training data
+- trials: optional number to control the number of boosting iterations.
+- costs: optional matrix specifyig costs associated with types of errors
+
+### Make predictions
+'''{r}
+p <- predict(m, test, type = "class")
+'''
+- m: model trained by the C5.0() function
+- test: data frame containing test data
+- type: "class" or "prob", specifies wheter the predictions should be the most likely class value or the raw predicted probabilities
+
+
+## One Rule algorithm
+Selects a single rule, this may seem simplistic but it tend to perform better than expected.
+Pros:
+- Generates a single rule
+- Obten performs very well
+- Can serve as benchmark for more complex algorithms
+
+Cons:
+- Uses only a single feature
+- Very simplistic
+
+### 1R classification rule syntax
+Use the 'OneR()' function in the "RWeka" package
+### Build the classifier:
+'''{r}
+m <- oneR(class ~ predictors, data = mydata)
+'''
+- class: column in mydata data frame to be predicted
+- predictors: R formula specifying the features in the mydata data frame to use for predictions
+- data: data frame in which class and predictors can be found
+### Make predictions:
+'''{r}
+p <- predict(m, test)
+'''
+- m: model trained by the OneR() function
+- test: data frame containif test data
+
+
+## Ripper algorithm
+Repeated incremental oruning to produce error reduction
+Pros:
+- Generates easy rules
+- Efficient on large and noisy datasets
+- Produces a simpler model than a comparable decision tree
+
+Cons:
+- May result in rules that seem to defy common sense
+- Not ideal for numeric data
+- Might not perform as well as more complex models
+
+### Ripper classification rule syntax
+Use the "JRip()" function in the "RWeka" package
+### Build the classifier:
+'''{r}
+m <- JRip(class ~ predictors, data = mydata)
+'''
+ class: column in mydata data frame to be predicted
+- predictors: R formula specifying the features in the mydata data frame to use for predictions
+- data: data frame in which class and predictors can be found
+
+### Make predictions:
+'''{r}
+p <- predict(m, test)
+'''
+- m: model trained by the JRip() function
+- test: data frame containif test data
+
