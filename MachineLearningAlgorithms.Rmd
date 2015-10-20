@@ -272,7 +272,7 @@ Use the `neuralnet()' function in the 'neuralnet' package.
 m <- neuralnet(target ~ predictors, data = mydata, hidden = 1)
 ```
 - target: outcome in the mydata data frame to be modeled
-- predictors: R formula specifying the features in the mydata data fra,e
+- predictors: R formula specifying the features in the mydata data frame
 - hidden: number of neurons in the hidden layer
 
 ### Make predictions
@@ -389,10 +389,11 @@ Use `randomForest()` function in the `randomForest` package
 
 ## Build the classifier
 ```{r}
-m <- randomForest(train, class, ntree = 500, mtry = sqrt(p))
+m <- randomForest(target ~ predictors, data = mydata, ntree = 500, mtry = sqrt(p))
 ```
-- train: data frame with training data
-- class: factor vector with the class for each row
+- target: outcome in the mydata data frame to be modeled
+- predictors: R formula specifying the features in the mydata data frame
+- data: data frame with training data
 - ntree: number of trees to grow
 - mtry: optional integer specifying the number of features to randomly select at each split, p is the number of features in the data
 
