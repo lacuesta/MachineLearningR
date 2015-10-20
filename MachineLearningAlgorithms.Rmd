@@ -17,16 +17,19 @@ Cons:
 - Nominal features and missing data require additional processing
 
 ## kNN algorithm
+The kNN algorithm uses a dataset composed of examples classified
+in several categories, as labeled by a nominal variable. kNN identifies k
+records that are the nearest in similarity.
+The features should be transformed to a standard range before applying the kNN algorithm, as min-max normalization or z-score standarization.
 
-
+### Building the classifier and making predictions
+Function 'knn()' in the 'class' package,
 ```{r}
-summary(cars)
+p <- knn(train, test, class, k)
 ```
+- train: data frame containing numeric training data
+- test: data frame containing numeric test data
+- class: factor vector with the class for each row in the training data
+- k: integer indcating the number of nearest neighbors
 
-You can also embed plots, for example:
 
-```{r, echo=FALSE}
-plot(cars)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
