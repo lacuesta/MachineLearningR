@@ -50,17 +50,17 @@ It uses frequency tables, so each feature must be categorical in order to create
 ## Naive Bayes classification syntax.
 Use the 'naiveBayes()' function in the 'e1071' package.
 ### Build the classifier
-'''{r}
+```{r}
 m <- naiveBayes(train, class, laplace = 0)
-'''
+```
 - train: data frame or matrix containing the training data
 - class: factor vector with the class for each row in the training data
 - laplace: number to control the Laplace estimator
 
 ### Make predictions
-'''{r}
+```{r}
 p <- predict(m , test, type = "class")
-'''
+```
 - m: model trained by 'naiveBayes()'
 - test: data frame or matrix with test data with the same features as the training data
 - type: "class" or "raw" that specifies if the predictions should be the most likely class value or the raw predicted probabilities.
@@ -85,18 +85,18 @@ Cons:
 ### C5.0 decision tree syntax
 Use the 'C5.0()' function in the 'C50' package
 ### Build the model
-'''{r}
+```{r}
 m <- C5.0(train, class, trials = 1, costs = NULL)
-'''
+```
 - train: data frame with the training data
 - class: factor vector with the class for each row in the training data
 - trials: optional number to control the number of boosting iterations.
 - costs: optional matrix specifyig costs associated with types of errors
 
 ### Make predictions
-'''{r}
+```{r}
 p <- predict(m, test, type = "class")
-'''
+```
 - m: model trained by the C5.0() function
 - test: data frame containing test data
 - type: "class" or "prob", specifies wheter the predictions should be the most likely class value or the raw predicted probabilities
@@ -116,16 +116,16 @@ Cons:
 ### 1R classification rule syntax
 Use the 'OneR()' function in the "RWeka" package
 ### Build the classifier:
-'''{r}
+```{r}
 m <- oneR(class ~ predictors, data = mydata)
-'''
+```
 - class: column in mydata data frame to be predicted
 - predictors: R formula specifying the features in the mydata data frame to use for predictions
 - data: data frame in which class and predictors can be found
 ### Make predictions:
-'''{r}
+```{r}
 p <- predict(m, test)
-'''
+```
 - m: model trained by the OneR() function
 - test: data frame containif test data
 
@@ -145,17 +145,17 @@ Cons:
 ### Ripper classification rule syntax
 Use the "JRip()" function in the "RWeka" package
 ### Build the classifier:
-'''{r}
+```{r}
 m <- JRip(class ~ predictors, data = mydata)
-'''
+```
  class: column in mydata data frame to be predicted
 - predictors: R formula specifying the features in the mydata data frame to use for predictions
 - data: data frame in which class and predictors can be found
 
 ### Make predictions:
-'''{r}
+```{r}
 p <- predict(m, test)
-'''
+```
 - m: model trained by the JRip() function
 - test: data frame containif test data
 
