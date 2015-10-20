@@ -4,6 +4,7 @@ author: "Vicente Lacuesta"
 date: "20 de octubre de 2015"
 output: html_document
 ---
+
 # Nearest neighbors algorithm
 Pros:
 - Simple and effective
@@ -49,6 +50,7 @@ It uses frequency tables, so each feature must be categorical in order to create
 
 ## Naive Bayes classification syntax.
 Use the `naiveBayes()´ function in the `e1071` package.
+
 ### Build the classifier
 ```{r}
 m <- naiveBayes(train, class, laplace = 0)
@@ -66,6 +68,7 @@ p <- predict(m , test, type = "class")
 - type: "class" or "raw" that specifies if the predictions should be the most likely class value or the raw predicted probabilities.
 
 # Decision trees
+
 ## The C5.0 decision tree algorithm
 Pros:
 - All purpose classifier
@@ -84,6 +87,7 @@ Cons:
 
 ### C5.0 decision tree syntax
 Use the `C5.0()` function in the `C50` package
+
 ### Build the model
 ```{r}
 m <- C5.0(train, class, trials = 1, costs = NULL)
@@ -115,6 +119,7 @@ Cons:
 
 ### 1R classification rule syntax
 Use the `OneR()` function in the `RWeka` package
+
 ### Build the classifier:
 ```{r}
 m <- oneR(class ~ predictors, data = mydata)
@@ -122,6 +127,7 @@ m <- oneR(class ~ predictors, data = mydata)
 - class: column in mydata data frame to be predicted
 - predictors: R formula specifying the features in the mydata data frame to use for predictions
 - data: data frame in which class and predictors can be found
+
 ### Make predictions:
 ```{r}
 p <- predict(m, test)
@@ -144,6 +150,7 @@ Cons:
 
 ### Ripper classification rule syntax
 Use the `JRip()` function in the `RWeka` package
+
 ### Build the classifier:
 ```{r}
 m <- JRip(class ~ predictors, data = mydata)
@@ -160,6 +167,7 @@ p <- predict(m, test)
 - test: data frame containif test data
 
 # Regression Methods
+
 ## Multiple linear regressions
 Pros:
 - The most common approach for modeling numeric data.
@@ -175,6 +183,7 @@ Cons:
 
 ### Multiple regression modeling syntax
 Use the `lm()` function in the `stats` package.
+
 ### Build the model
 ```{r}
 m <- lm(dv ~ iv, data = mydata)
@@ -182,6 +191,7 @@ m <- lm(dv ~ iv, data = mydata)
 - dv: dependent variable in the mydat data frame to be modeled
 - iv: R formula specifying the independent variables in mydata data frame
 - data: the data frame
+
 ### Make predictions
 ```{r}
 p <- predict(m, test)
@@ -213,6 +223,7 @@ m <- rpart(dv ~ iv, data = mydata)
 - dv: dependent variable in the mydat data frame to be modeled
 - iv: R formula specifying the independent variables in mydata data frame
 - data: the data frame
+
 ### Make predictions
 ```{r}
 p <- predict(m, test, type = "vector")
@@ -221,10 +232,13 @@ p <- predict(m, test, type = "vector")
 - test: data frame containing test data
 - type: type of prediction, "vector" (predicted numeric values), "class" (predicted classes) or "prob" (predicted class probabilities)
 
+
 ## Model tree
 Replace the leaf nodes with regression models.
+
 ### Model trees syntax
 Use the `M5P()` function in the `RWeka` package
+
 ### Build the model
 ```{r}
 m <- M5P(dv ~ iv, data = mydata)
@@ -232,6 +246,7 @@ m <- M5P(dv ~ iv, data = mydata)
 - dv: dependent variable in the mydat data frame to be modeled
 - iv: R formula specifying the independent variables in mydata data frame
 - data: the data frame
+
 ### Make predictions
 ```{r}
 p <- predict(m, test)
@@ -248,8 +263,10 @@ Cons:
 - Computiationally intensive and slow to train
 - Easy to overfit or unferfit
 - Results in a complex black box model.
+
 ### Neural network syntax
 Use the `neuralnet()' function in the 'neuralnet' package.
+
 ### Build the model
 ```{r}
 m <- neuralnet(target ~ predictors, data = mydata, hidden = 1)
@@ -279,6 +296,7 @@ Cons:
 - Results in complex black bo model
 ## Support vector machine syntax
 Use the `ksvm()` function in the `kernlab` package.
+
 ## Build the model
 ```{r}
 m <- ksvm(target ~ predictors, data = mydata, kernel = "rbfdot", C = 1)
@@ -310,6 +328,7 @@ Cons:
 
 ## Association rule syntax
 Use `apriori()` function in `arules` package
+
 ## Find association rules:
 ```{r}
 myrules <- apriori(data = mydata, parameter = list(support = 0.1,
@@ -327,6 +346,7 @@ inspect(myrules)
 ```
 
 # Clustering with k-means
+
 ## k-means algorithm for clustering
 Pros:
 - Uses simple principles for identifying clusters
@@ -340,12 +360,14 @@ Cons:
 
 ### Clustering syntax
 Use the `kmeans()´function in the ´stats´ package
+
 ### Find clusters:
 ```{r}
 myclusters <- kmeans(mydata, k)
 ```
 - mydata: matrix or data frame with the examples to be clustered
 - k: desired number of clusters
+
 ### Examine clusters
 - mycluster$cluster: vector of cluster assignments
 - mycluster$centers: matrix indicating the men values for each features
@@ -364,6 +386,7 @@ Cons:
 
 ## Random forest syntax
 Use `randomForest()` function in the `randomForest` package
+
 ## Build the classifier
 ```{r}
 m <- randomForest(train, class, ntree = 500, mtry = sqrt(p))
