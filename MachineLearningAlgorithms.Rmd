@@ -1,0 +1,32 @@
+---
+title: "Machine Learning Methods with R"
+author: "Vicente Lacuesta"
+date: "20 de octubre de 2015"
+output: html_document
+---
+# Nearest neighbors algorithm
+Pros:
+- Simple and effective
+- No assumptions about the underliying data distribution
+- Fast training phase
+
+Cons:
+- Does not produce a model
+- Slow classification phase
+- Requires a large amount of memory
+- Nominal features and missing data require additional processing
+
+## kNN algorithm
+
+
+```{r}
+summary(cars)
+```
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
