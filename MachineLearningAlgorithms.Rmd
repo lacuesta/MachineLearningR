@@ -159,3 +159,84 @@ p <- predict(m, test)
 - m: model trained by the JRip() function
 - test: data frame containif test data
 
+# Regression Methods
+## Multiple linear regressions
+Pros:
+- The most common approach for modeling numeric data.
+- Can be adapted to model almost any data
+- Provides estimates of the strength and size of the relationships moing features and the outcome
+
+Cons:
+- Makes strong assumptions about the data
+- The model's form must be specified in advance
+- Does not perform well with missing data
+- Only works with numeric features
+- Requires some knowledge of statistics
+
+### Multiple regression modeling syntax
+Use the 'lm()' function in the 'stats' package.
+### Build the model
+```{r}
+m <- lm(dv ~ iv, data = mydata)
+```
+- dv: dependent variable in the mydat data frame to be modeled
+- iv: R formula specifying the independent variables in mydata data frame
+- data: the data frame
+### Make predictions
+```{r}
+p <- predict(m, test)
+```
+- m: model trained by the 'lm()' function
+- test: data frame containing test data
+
+## Regression trees
+Pros:
+- Combines the strenghs of decision trees with the ability to model numeric data
+- Does automatic feature selection
+- Does not require to specify the model in advance
+- May fit some types of data better than linear regression
+- Does not require knowledge of statistics
+
+Cons:
+- Not as commonly-used as linear regression
+- Requires a large amount of training data
+- Difficult to determine the overall net effect of individual features
+- May be more difficult to interpret
+
+### Regression trees syntax
+Use 'rpart()' function in the 'rpart' package
+
+### Build the model
+```{r}
+m <- rpart(dv ~ iv, data = mydata)
+```
+- dv: dependent variable in the mydat data frame to be modeled
+- iv: R formula specifying the independent variables in mydata data frame
+- data: the data frame
+### Make predictions
+```{r}
+p <- predict(m, test, type = "vector")
+```
+- m: model trained by the 'rpart()' function
+- test: data frame containing test data
+- type: type of prediction, "vector" (predicted numeric values), "class" (predicted classes) or "prob" (predicted class probabilities)
+
+## Model tree
+Replace the leaf nodes with regression models.
+### Model trees syntax
+Use the 'M5P()' function in the 'RWeka' package
+### Build the model
+```{r}
+m <- M5P(dv ~ iv, data = mydata)
+```
+- dv: dependent variable in the mydat data frame to be modeled
+- iv: R formula specifying the independent variables in mydata data frame
+- data: the data frame
+### Make predictions
+```{r}
+p <- predict(m, test)
+```
+- m: model trained by the 'M5P()' function
+- test: data frame containing test data
+
+# Neural Networks and Support Vector Machines
