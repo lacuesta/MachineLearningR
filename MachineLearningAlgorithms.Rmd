@@ -23,7 +23,7 @@ records that are the nearest in similarity.
 The features should be transformed to a standard range before applying the kNN algorithm, as min-max normalization or z-score standarization.
 
 ### Building the classifier and making predictions
-Function 'knn()' in the 'class' package,
+Function `knn()` in the `class` package,
 ```{r}
 p <- knn(train, test, class, k)
 ```
@@ -48,7 +48,7 @@ Cons:
 It uses frequency tables, so each feature must be categorical in order to create the combinations of class and feature values. The solutions are: discretize (binning).
 
 ## Naive Bayes classification syntax.
-Use the 'naiveBayes()' function in the 'e1071' package.
+Use the `naiveBayes()´ function in the `e1071` package.
 ### Build the classifier
 ```{r}
 m <- naiveBayes(train, class, laplace = 0)
@@ -61,7 +61,7 @@ m <- naiveBayes(train, class, laplace = 0)
 ```{r}
 p <- predict(m , test, type = "class")
 ```
-- m: model trained by 'naiveBayes()'
+- m: model trained by `naiveBayes()`
 - test: data frame or matrix with test data with the same features as the training data
 - type: "class" or "raw" that specifies if the predictions should be the most likely class value or the raw predicted probabilities.
 
@@ -83,7 +83,7 @@ Cons:
 - Large trees difficult to interpret
 
 ### C5.0 decision tree syntax
-Use the 'C5.0()' function in the 'C50' package
+Use the `C5.0()` function in the `C50` package
 ### Build the model
 ```{r}
 m <- C5.0(train, class, trials = 1, costs = NULL)
@@ -114,7 +114,7 @@ Cons:
 - Very simplistic
 
 ### 1R classification rule syntax
-Use the 'OneR()' function in the "RWeka" package
+Use the `OneR()` function in the `RWeka` package
 ### Build the classifier:
 ```{r}
 m <- oneR(class ~ predictors, data = mydata)
@@ -143,7 +143,7 @@ Cons:
 - Might not perform as well as more complex models
 
 ### Ripper classification rule syntax
-Use the "JRip()" function in the "RWeka" package
+Use the `JRip()` function in the `RWeka` package
 ### Build the classifier:
 ```{r}
 m <- JRip(class ~ predictors, data = mydata)
@@ -174,7 +174,7 @@ Cons:
 - Requires some knowledge of statistics
 
 ### Multiple regression modeling syntax
-Use the 'lm()' function in the 'stats' package.
+Use the `lm()` function in the `stats` package.
 ### Build the model
 ```{r}
 m <- lm(dv ~ iv, data = mydata)
@@ -186,7 +186,7 @@ m <- lm(dv ~ iv, data = mydata)
 ```{r}
 p <- predict(m, test)
 ```
-- m: model trained by the 'lm()' function
+- m: model trained by the `lm()` function
 - test: data frame containing test data
 
 ## Regression trees
@@ -204,7 +204,7 @@ Cons:
 - May be more difficult to interpret
 
 ### Regression trees syntax
-Use 'rpart()' function in the 'rpart' package
+Use `rpart()` function in the `rpart` package
 
 ### Build the model
 ```{r}
@@ -217,14 +217,14 @@ m <- rpart(dv ~ iv, data = mydata)
 ```{r}
 p <- predict(m, test, type = "vector")
 ```
-- m: model trained by the 'rpart()' function
+- m: model trained by the `rpart()` function
 - test: data frame containing test data
 - type: type of prediction, "vector" (predicted numeric values), "class" (predicted classes) or "prob" (predicted class probabilities)
 
 ## Model tree
 Replace the leaf nodes with regression models.
 ### Model trees syntax
-Use the 'M5P()' function in the 'RWeka' package
+Use the `M5P()` function in the `RWeka` package
 ### Build the model
 ```{r}
 m <- M5P(dv ~ iv, data = mydata)
@@ -236,7 +236,7 @@ m <- M5P(dv ~ iv, data = mydata)
 ```{r}
 p <- predict(m, test)
 ```
-- m: model trained by the 'M5P()' function
+- m: model trained by the `M5P()` function
 - test: data frame containing test data
 
-# Neural Networks and Support Vector Machines
+# Neural Networks and Support Vector Machinesº
