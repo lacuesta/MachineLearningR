@@ -294,6 +294,7 @@ Cons:
 - Finding the best model requires testing of various combinations of kernel and model parameters
 - Can be slow to train
 - Results in complex black bo model
+
 ## Support vector machine syntax
 Use the `ksvm()` function in the `kernlab` package.
 
